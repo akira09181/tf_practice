@@ -1,9 +1,9 @@
 terraform {
-    required_version = ""
+    required_version = ">=1.3"
     required_providers{
         aws = {
             source = "hashicorp/aws"
-            version = "~>3.0"
+            version = "~>4.0"
         }
     }
 }
@@ -17,7 +17,7 @@ variable "project" {
     type = string
 }
 
-valiable "envionment" {
+variable "envionment" {
     type = string
 }
 
