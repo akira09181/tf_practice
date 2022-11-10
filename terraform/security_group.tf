@@ -102,7 +102,7 @@ resource "aws_network_acl" "monosecom_acl_link_private_2" {
 
 
 resource "aws_security_group" "web_sg" {
-  name        = "{var.envionment}-web-sg"
+  name        = "${var.envionment}-web-sg"
   description = "web front role security group"
   vpc_id      = aws_vpc.vpc.id
 
@@ -114,6 +114,26 @@ resource "aws_security_group" "web_sg" {
 
 resource "aws_security_group_rule" "web_in_http" {
   security_group_id = aws_security_group.web_sg.id
+  type              = "ingress"
+  protocol          = "tcp"
+  from_port         = 80
+  to_port           = 80
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group" "web_sg_iot" {
+  name        = "${var.envionment}-web-sg"
+  description = "web front role security group"
+  vpc_id      = aws_vpc.vpc_iot.id
+
+  tags = {
+    Name = "${var.envionment}monosc-web-sg_iot"
+    Env  = var.envionment
+  }
+}
+
+resource "aws_security_group_rule" "web_iot_in_http" {
+  security_group_id = aws_security_group.web_sg_iot.id
   type              = "ingress"
   protocol          = "tcp"
   from_port         = 80
