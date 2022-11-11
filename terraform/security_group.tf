@@ -20,7 +20,7 @@ resource "aws_network_acl" "monosecom_acl_iot" {
   }
 
   tags = {
-    Name = "${var.envionment}monosc-nacl-iot-pri-01"
+    Name = "${var.environment}monosc-nacl-iot-pri-01"
   }
 }
 resource "aws_network_acl" "monosecom_acl_link_public" {
@@ -45,7 +45,7 @@ resource "aws_network_acl" "monosecom_acl_link_public" {
   }
 
   tags = {
-    Name = "${var.envionment}monosc-nacl-link-pub"
+    Name = "${var.environment}monosc-nacl-link-pub"
   }
 }
 resource "aws_network_acl" "monosecom_acl_link_private_1" {
@@ -70,7 +70,7 @@ resource "aws_network_acl" "monosecom_acl_link_private_1" {
   }
 
   tags = {
-    Name = "${var.envionment}monosc-nacl-link-pri-01"
+    Name = "${var.environment}monosc-nacl-link-pri-01"
   }
 }
 resource "aws_network_acl" "monosecom_acl_link_private_2" {
@@ -95,20 +95,20 @@ resource "aws_network_acl" "monosecom_acl_link_private_2" {
   }
 
   tags = {
-    Name = "${var.envionment}monosc-nacl-link-pri-02"
+    Name = "${var.environment}monosc-nacl-link-pri-02"
   }
 }
 
 
 
 resource "aws_security_group" "web_sg" {
-  name        = "${var.envionment}-web-sg"
+  name        = "${var.environment}-web-sg"
   description = "web front role security group"
   vpc_id      = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.envionment}monosc-web-sg"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-web-sg"
+    Env  = var.environment
   }
 }
 
@@ -122,13 +122,13 @@ resource "aws_security_group_rule" "web_in_http" {
 }
 
 resource "aws_security_group" "web_sg_iot" {
-  name        = "${var.envionment}-web-sg"
+  name        = "${var.environment}-web-sg"
   description = "web front role security group"
   vpc_id      = aws_vpc.vpc_iot.id
 
   tags = {
-    Name = "${var.envionment}monosc-web-sg_iot"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-web-sg_iot"
+    Env  = var.environment
   }
 }
 

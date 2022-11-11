@@ -6,8 +6,8 @@ resource "aws_vpc" "vpc" {
   assign_generated_ipv6_cidr_block = false
 
   tags = {
-    Name = "${var.envionment}monosc-vpc-link"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-vpc-link"
+    Env  = var.environment
   }
 }
 resource "aws_vpc" "vpc_iot" {
@@ -18,8 +18,8 @@ resource "aws_vpc" "vpc_iot" {
   assign_generated_ipv6_cidr_block = false
 
   tags = {
-    Name = "${var.envionment}monosc-vpc-iot"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-vpc-iot"
+    Env  = var.environment
   }
 }
 
@@ -31,8 +31,8 @@ resource "aws_subnet" "public_subnet_1a" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.envionment}monosc-sn-az4-link-pub"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-sn-az4-link-pub"
+    Env  = var.environment
     Type = "public"
   }
 }
@@ -44,8 +44,8 @@ resource "aws_subnet" "public_subnet_1c" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.envionment}monosc-sn-az1-link-pub"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-sn-az1-link-pub"
+    Env  = var.environment
     Type = "public"
   }
 }
@@ -57,8 +57,8 @@ resource "aws_subnet" "private_subnet_1a" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.envionment}monosc-sn-az1-link-pri-01"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-sn-az1-link-pri-01"
+    Env  = var.environment
     Type = "private"
   }
 }
@@ -70,8 +70,8 @@ resource "aws_subnet" "private_subnet_1c" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.envionment}monosc-sn-az1-link-pri-02"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-sn-az1-link-pri-02"
+    Env  = var.environment
     Type = "private"
   }
 }
@@ -83,8 +83,8 @@ resource "aws_subnet" "private_subnet4_1a" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.envionment}monosc-sn-az4-link-pri-01"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-sn-az4-link-pri-01"
+    Env  = var.environment
     Type = "private"
   }
 }
@@ -95,8 +95,8 @@ resource "aws_subnet" "private_subnet4_1a_2" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.envionment}monosc-sn-az4-link-pri-02"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-sn-az4-link-pri-02"
+    Env  = var.environment
     Type = "private"
   }
 }
@@ -107,8 +107,8 @@ resource "aws_subnet" "private_subnet_iot_1c" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.envionment}monosc-sn-az1-iot-pri-01"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-sn-az1-iot-pri-01"
+    Env  = var.environment
     Type = "private"
   }
 }
@@ -119,8 +119,8 @@ resource "aws_subnet" "private_subnet_iot_1a" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.envionment}monosc-sn-az1-iot-pri-02"
-    Env  = var.envionment
+    Name = "${var.environment}monosc-sn-az1-iot-pri-02"
+    Env  = var.environment
     Type = "private"
   }
 }
@@ -129,9 +129,9 @@ resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.envionment}monosc-public_rt"
+    Name = "${var.environment}monosc-public_rt"
 
-    Env  = var.envionment
+    Env  = var.environment
     Type = "public"
   }
 }
@@ -149,9 +149,9 @@ resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.envionment}monosc-private_rt"
+    Name = "${var.environment}monosc-private_rt"
 
-    Env  = var.envionment
+    Env  = var.environment
     Type = "private"
   }
 }
@@ -169,9 +169,9 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.envionment}monosc-igw"
+    Name = "${var.environment}monosc-igw"
 
-    Env = var.envionment
+    Env = var.environment
   }
 }
 
@@ -185,14 +185,14 @@ resource "aws_eip" "nat_1a" {
   vpc = true
 
   tags = {
-    Name = "${var.envionment}monosc-natgw-1a"
+    Name = "${var.environment}monosc-natgw-1a"
   }
 }
 resource "aws_eip" "nat_1c" {
   vpc = true
 
   tags = {
-    Name = "${var.envionment}monosc-natgw-1c"
+    Name = "${var.environment}monosc-natgw-1c"
   }
 }
 
@@ -201,7 +201,7 @@ resource "aws_nat_gateway" "nat_1a" {
   allocation_id = aws_eip.nat_1a.id              # 紐付けるElasti IP
 
   tags = {
-    Name = "${var.envionment}monosc-nat-1a"
+    Name = "${var.environment}monosc-nat-1a"
   }
 }
 resource "aws_nat_gateway" "nat_1c" {
@@ -209,6 +209,6 @@ resource "aws_nat_gateway" "nat_1c" {
   allocation_id = aws_eip.nat_1c.id              # 紐付けるElasti IP
 
   tags = {
-    Name = "${var.envionment}monosc-nat-1c"
+    Name = "${var.environment}monosc-nat-1c"
   }
 }
