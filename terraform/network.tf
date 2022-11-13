@@ -186,6 +186,7 @@ resource "aws_eip" "nat_1a" {
 
   tags = {
     Name = "${var.environment}monosc-natgw-1a"
+    Env  = var.environment
   }
 }
 resource "aws_eip" "nat_1c" {
@@ -193,6 +194,7 @@ resource "aws_eip" "nat_1c" {
 
   tags = {
     Name = "${var.environment}monosc-natgw-1c"
+    Env  = var.environment
   }
 }
 
@@ -202,6 +204,7 @@ resource "aws_nat_gateway" "nat_1a" {
 
   tags = {
     Name = "${var.environment}monosc-nat-1a"
+    Env  = var.environment
   }
 }
 resource "aws_nat_gateway" "nat_1c" {
@@ -210,5 +213,24 @@ resource "aws_nat_gateway" "nat_1c" {
 
   tags = {
     Name = "${var.environment}monosc-nat-1c"
+    Env  = var.environment
   }
 }
+
+resource "aws_vpc_endpoint" "vpc_endpoint" {
+    vpc_id          = aws_vpc.vpc.id
+    service_name    = "com.amazonaws.ap-northeast-1.s3"
+    policy = <<POLICY
+    {
+        "Statement": [
+            {
+                "Action": "*",
+                "Effect": "Allow",
+                "Resource": "*",
+                "Principal": "*"
+            }
+        ]
+    }
+    POLICY
+}
+

@@ -24,10 +24,6 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
     write_capacity = 10
     projection_type = "ALL"
   }
-   ttl {
-    attribute_name = "TimeToExist"
-    enabled        = false
-  }
 
   tags = {
     Name        = "dynamodb-table-1"
