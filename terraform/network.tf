@@ -218,9 +218,9 @@ resource "aws_nat_gateway" "nat_1c" {
 }
 
 resource "aws_vpc_endpoint" "vpc_endpoint" {
-    vpc_id          = aws_vpc.vpc.id
-    service_name    = "com.amazonaws.ap-northeast-1.s3"
-    policy = <<POLICY
+  vpc_id       = aws_vpc.vpc.id
+  service_name = "com.amazonaws.ap-northeast-1.s3"
+  policy       = <<POLICY
     {
         "Statement": [
             {

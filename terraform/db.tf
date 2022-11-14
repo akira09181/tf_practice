@@ -17,11 +17,11 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   }
 
   global_secondary_index {
-    name               = "contract"
-    hash_key           = "contractCd"
-    range_key          = "imei"
-    read_capacity  = 10
-    write_capacity = 10
+    name            = "contract"
+    hash_key        = "contractCd"
+    range_key       = "imei"
+    read_capacity   = 10
+    write_capacity  = 10
     projection_type = "ALL"
   }
 

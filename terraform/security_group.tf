@@ -1,6 +1,6 @@
 resource "aws_network_acl" "monosecom_acl_iot" {
-  vpc_id = aws_vpc.vpc_iot.id
-  subnet_ids =  aws_subnet.private_subnet_iot_1a.*.id
+  vpc_id     = aws_vpc.vpc_iot.id
+  subnet_ids = aws_subnet.private_subnet_iot_1a.*.id
   egress {
     protocol   = "all"
     rule_no    = 100
@@ -24,8 +24,8 @@ resource "aws_network_acl" "monosecom_acl_iot" {
   }
 }
 resource "aws_network_acl" "monosecom_acl_link_public" {
-  vpc_id = aws_vpc.vpc.id
-  subnet_ids =  aws_subnet.public_subnet_1a.*.id
+  vpc_id     = aws_vpc.vpc.id
+  subnet_ids = aws_subnet.public_subnet_1a.*.id
   egress {
     protocol   = "all"
     rule_no    = 100
@@ -49,8 +49,8 @@ resource "aws_network_acl" "monosecom_acl_link_public" {
   }
 }
 resource "aws_network_acl" "monosecom_acl_link_private_1" {
-  vpc_id = aws_vpc.vpc.id
-  subnet_ids =  aws_subnet.private_subnet_1a.*.id
+  vpc_id     = aws_vpc.vpc.id
+  subnet_ids = aws_subnet.private_subnet_1a.*.id
   egress {
     protocol   = "all"
     rule_no    = 100
@@ -74,8 +74,8 @@ resource "aws_network_acl" "monosecom_acl_link_private_1" {
   }
 }
 resource "aws_network_acl" "monosecom_acl_link_private_2" {
-  vpc_id = aws_vpc.vpc.id
-  subnet_ids =  aws_subnet.private_subnet4_1a_2.*.id
+  vpc_id     = aws_vpc.vpc.id
+  subnet_ids = aws_subnet.private_subnet4_1a_2.*.id
   egress {
     protocol   = "all"
     rule_no    = 100
