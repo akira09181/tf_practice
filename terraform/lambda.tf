@@ -28,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
  
 resource "aws_lambda_function" "test_lambda" {
   filename         = data.archive_file.sample_function.output_path
-  function_name    = "lambdaurl-test"
+  function_name    = "terraform-test"
   role             = aws_iam_role.function_role.arn
   handler          = "lambda_function.lambda_handler"
   publish          = true
