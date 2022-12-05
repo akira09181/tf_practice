@@ -26,9 +26,57 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
 }
  
  
-resource "aws_lambda_function" "test_lambda" {
+resource "aws_lambda_function" "initialreceive" {
   filename         = data.archive_file.sample_function.output_path
-  function_name    = "terraform-test"
+  function_name    = "${var.environment}monosec-lambda-initialreceive"
+  role             = aws_iam_role.function_role.arn
+  handler          = "lambda_function.lambda_handler"
+  publish          = true
+  source_code_hash = data.archive_file.sample_function.output_base64sha256
+  runtime          = "python3.9"
+}
+
+resource "aws_lambda_function" "receivedata" {
+  filename         = data.archive_file.sample_function.output_path
+  function_name    = "${var.environment}monosec-lambda-receivedata"
+  role             = aws_iam_role.function_role.arn
+  handler          = "lambda_function.lambda_handler"
+  publish          = true
+  source_code_hash = data.archive_file.sample_function.output_base64sha256
+  runtime          = "python3.9"
+}
+
+resource "aws_lambda_function" "history" {
+  filename         = data.archive_file.sample_function.output_path
+  function_name    = "${var.environment}monosec-lambda-history"
+  role             = aws_iam_role.function_role.arn
+  handler          = "lambda_function.lambda_handler"
+  publish          = true
+  source_code_hash = data.archive_file.sample_function.output_base64sha256
+  runtime          = "python3.9"
+}
+
+resource "aws_lambda_function" "status" {
+  filename         = data.archive_file.sample_function.output_path
+  function_name    = "${var.environment}monosec-lambda-status"
+  role             = aws_iam_role.function_role.arn
+  handler          = "lambda_function.lambda_handler"
+  publish          = true
+  source_code_hash = data.archive_file.sample_function.output_base64sha256
+  runtime          = "python3.9"
+}
+resource "aws_lambda_function" "hop" {
+  filename         = data.archive_file.sample_function.output_path
+  function_name    = "${var.environment}monosec-lambda-hop"
+  role             = aws_iam_role.function_role.arn
+  handler          = "lambda_function.lambda_handler"
+  publish          = true
+  source_code_hash = data.archive_file.sample_function.output_base64sha256
+  runtime          = "python3.9"
+}
+resource "aws_lambda_function" "requeststatus" {
+  filename         = data.archive_file.sample_function.output_path
+  function_name    = "${var.environment}monosec-lambda-requeststatus"
   role             = aws_iam_role.function_role.arn
   handler          = "lambda_function.lambda_handler"
   publish          = true
@@ -39,7 +87,7 @@ resource "aws_lambda_function" "test_lambda" {
 resource "aws_lambda_permission" "allow_cloudwatch" {
   statement_id  = "AllowExecutionFromCloudWatch"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.test_lambda.function_name
+  function_name = aws_lambda_function.initialreceive.function_name
   principal     = "events.amazonaws.com"
 }
  
